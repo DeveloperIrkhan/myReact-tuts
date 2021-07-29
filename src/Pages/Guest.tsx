@@ -4,17 +4,23 @@ interface Props { }
 
 interface State {
     Name: string;
+    GuestList:[]
 }
 
 export class Guest extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            Name: ""
+            Name: "",
+            GuestList:[]
         };
     }
-
+     PushToGuestList() {
+        this.setState({Name:""})
+    }
+    
     render() {
+        let {Name}=this.state;
         return (
             <div className="container">
                 <h4>Guest's List</h4>
@@ -35,9 +41,16 @@ export class Guest extends React.Component<Props, State> {
 
 
                 <div className='col'>
-                    <input type="text" className="form-control"/>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        onChange={ (e)=> {
+                            this.setState({Name: e.target.value})
+                        }}/>
                     <br />
-                    <button className="btn btn-success hover hover-danger col-3">Add Guest</button>
+                    <button 
+                        className="btn btn-success hover hover-danger col-3"
+                        onClick={()=>{this.PushToGuestList()}}>Add Guest</button>
                 </div>
             </div>
         )
